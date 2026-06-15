@@ -11,13 +11,12 @@ export async function GET() {
     return NextResponse.json({ error: 'User profile not found' }, { status: 404 });
   }
 
-  return NextResponse.json({
-    userId: user.id,
+return NextResponse.json({
+  user: {
+    userId: user.id!,
     email: user.email,
     role: user.role_key,
-    first_name: user.first_name,
-    last_name: user.last_name,
+    fullName: `${user.first_name ?? ''} ${user.last_name ?? ''}`.trim(),
     department: user.department,
-    is_active: user.is_active,
-  });
-}
+  },
+});
